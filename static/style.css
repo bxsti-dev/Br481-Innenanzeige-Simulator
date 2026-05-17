@@ -1,0 +1,26 @@
+body {
+    background-color: #282d37;
+}
+
+#matrix_frame {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+
+    background-color: #191514;
+
+    border-color: #beb5a4;
+    border-style: solid;
+    border-width: 20px;
+    border-radius: 5px;
+}
+
+#matrix {
+    margin-top: 0.6%;
+    margin-bottom: 0.6%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
