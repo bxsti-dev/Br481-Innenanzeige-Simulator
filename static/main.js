@@ -69,8 +69,8 @@ window.onload = async function(){
     }
 
     add_characters("S2");
-
-    for(var y = 0;y<7;y++){ //FIX: TEMP SPACE2 -> make it better later on (remove font.json space1 ?? ) 
+    //TODO: Add space(number_of_spaces) function
+    for(var y = 0;y<7;y++){ //FIX: TEMP SPACE2 -> make it better later on (remove font.json space1 ?? ) -> space(n) function
         for(var x = 0;x<2;x++){
             data[y].push(0);
         }   
@@ -82,7 +82,7 @@ window.onload = async function(){
     function shift_matrix(){
         for(var y = 0;y<7;y++){
             data[y].shift();
-            data[y].push(0);
+            data[y].push(0); //TODO: don't push when length is over 145 (only shift overflow items when length over 145) fix for line 58
         }
         
         draw();
