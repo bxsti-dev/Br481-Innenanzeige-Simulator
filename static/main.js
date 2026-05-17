@@ -1,4 +1,4 @@
-window.onload = function(){
+window.onload = async function(){
     const matrix = document.getElementById("matrix");
     const canvas = document.getElementById("canvas");
 
@@ -18,6 +18,15 @@ window.onload = function(){
             data[fill_y][fill_x] = 0;
         }
     }
+
+    // load json
+    let font = {};
+
+    async function load_json(){
+        const font_res = await fetch("/static/data/font.json");
+        font = await font_res.json();
+    }
+    await load_json();
 
 
 
@@ -46,15 +55,40 @@ window.onload = function(){
     draw();
 
 
+    //TODO: "clean up" array -> array gets longer with that pushing -> reduce array back to 145 length when finished
+    function add_characters(characters){
+        for(var i = 0;i<characters.length;i++){
+
+            for(var y = 0;y<7;y++){
+                for(var x = 0;x<5;x++){
+                    data[y].push(font[characters[i]][y][x]);
+                }   
+            }
+
+        }
+    }
+
+    add_characters("S2");
+
+    for(var y = 0;y<7;y++){ //FIX: TEMP SPACE2 -> make it better later on (remove font.json space1 ?? ) 
+        for(var x = 0;x<2;x++){
+            data[y].push(0);
+        }   
+    }
+    add_characters("2");
+
+
 
     function shift_matrix(){
-        data[0].shift();
-        data[0].push(1);
+        for(var y = 0;y<7;y++){
+            data[y].shift();
+            data[y].push(0);
+        }
         
         draw();
 
-        setTimeout(shift_matrix, 500);
+        setTimeout(shift_matrix, 200);
     }
 
-    setTimeout(shift_matrix, 500); //use setInterval ??
+    setTimeout(shift_matrix, 200); //use setInterval ??
 }
