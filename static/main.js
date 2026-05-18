@@ -55,7 +55,6 @@ window.onload = async function(){
     draw();
 
 
-    //TODO: "clean up" array -> array gets longer with that pushing -> reduce array back to 145 length when finished
     function add_characters(characters){
         for(var i = 0;i<characters.length;i++){
 
@@ -65,16 +64,21 @@ window.onload = async function(){
                 }   
             }
 
+            add_spaces(1);
+        }
+    }
+
+
+    function add_spaces(number_of_space){
+        for(var y = 0;y<7;y++){
+            for(var x = 0;x<number_of_space;x++){
+                data[y].push(0);
+            }
         }
     }
 
     add_characters("S2");
-    //TODO: Add space(number_of_spaces) function
-    for(var y = 0;y<7;y++){ //FIX: TEMP SPACE2 -> make it better later on (remove font.json space1 ?? ) -> space(n) function
-        for(var x = 0;x<2;x++){
-            data[y].push(0);
-        }   
-    }
+    add_spaces(2);
     add_characters("2");
 
 
@@ -82,13 +86,15 @@ window.onload = async function(){
     function shift_matrix(){
         for(var y = 0;y<7;y++){
             data[y].shift();
-            data[y].push(0); //TODO: don't push when length is over 145 (only shift overflow items when length over 145) fix for line 58
+            if(data[0].length <= 145){ // don´t overflow
+                data[y].push(0); 
+            }
         }
         
         draw();
 
-        setTimeout(shift_matrix, 200);
+        setTimeout(shift_matrix, 50);
     }
 
-    setTimeout(shift_matrix, 200); //use setInterval ??
+    setTimeout(shift_matrix, 50); //use setInterval ??
 }
