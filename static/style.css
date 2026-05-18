@@ -24,3 +24,32 @@ body {
     margin-left: 2%;
     margin-right: 2%;
 }
+
+#control_box {
+    position: absolute;
+    bottom: 0;
+
+    left:50%;
+    transform: translateX(-50%);
+
+    margin: 20px;
+
+    background-color: red;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+select {
+    background-color: #20252e;
+    color: #ffffff;
+
+    border-color: #373c45;
+    border-radius: 4px;
+    
+    font-size: larger;
+
+    padding: 5px;
+}

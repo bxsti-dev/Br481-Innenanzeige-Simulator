@@ -57,11 +57,11 @@ window.onload = async function(){
 
     function add_characters(characters){
         for(var i = 0;i<characters.length;i++){
-
+            
             for(var y = 0;y<7;y++){
                 for(var x = 0;x<5;x++){
                     data[y].push(font[characters[i]][y][x]);
-                }   
+                }
             }
 
             add_spaces(1);
@@ -77,24 +77,22 @@ window.onload = async function(){
         }
     }
 
-    add_characters("S2");
-    add_spaces(2);
-    add_characters("2");
 
+    add_characters("S2 nach Lichtenrade");
+    // add_spaces(2);
 
 
     function shift_matrix(){
         for(var y = 0;y<7;y++){
             data[y].shift();
-            if(data[0].length <= 145){ // don´t overflow
+            if(data[0].length <= 145){ // no overflow
                 data[y].push(0); 
             }
         }
         
         draw();
-
-        setTimeout(shift_matrix, 50);
+        setTimeout(shift_matrix, 40);
     }
 
-    setTimeout(shift_matrix, 50); //use setInterval ??
+    setTimeout(shift_matrix, 40); //use setInterval ??
 }
