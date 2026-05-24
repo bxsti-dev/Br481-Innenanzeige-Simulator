@@ -7,7 +7,6 @@ window.addEventListener("load", async function() {
 
     // load station data
     let stations = {};
-
     async function load_json(){
         const font_res = await fetch("/static/data/stations.json");
         stations = await font_res.json();
@@ -53,10 +52,16 @@ window.addEventListener("load", async function() {
             destination_select.add(new_destination);
         }
 
+        // set random start values
+        line_select.value = line;
+        //destination_select.value = Object.keys(stations)[-1]; //random first || last ???
+        //current_station_select.value = "";                    //random               ???
         //TODO: correct (random) start destination (first or last) + correct (random) start current_station
+
+        //TODO: send trigger to main.js > change matrix based on selection
     }
 
 
-    change_line("S1")
+    change_line("S1") // random?
 
 });
