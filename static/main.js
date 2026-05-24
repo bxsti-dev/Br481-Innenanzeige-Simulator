@@ -1,4 +1,4 @@
-window.onload = async function(){
+window.addEventListener("load", async function() {
     const matrix = document.getElementById("matrix");
     const canvas = document.getElementById("canvas");
 
@@ -95,4 +95,4 @@ window.onload = async function(){
     }
 
     setTimeout(shift_matrix, 40); //use setInterval ??
-}
+});
