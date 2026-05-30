@@ -39,7 +39,7 @@ window.addEventListener("load", async function() {
             }
         }
 
-        // fill select elements
+        // fill select elements with stations
         for(var i = 0;i<stations[line].length;i++){
             var new_destination = document.createElement("option");
             var new_current_station = document.createElement("option");
@@ -54,6 +54,9 @@ window.addEventListener("load", async function() {
 
         // set random start values
         line_select.value = line;
+        // console.log(Object.keys(stations));
+        // console.log(stations["S1"]);
+        // console.log(stations[line].length);
         //destination_select.value = Object.keys(stations)[-1]; //random first || last ???
         //current_station_select.value = "";                    //random               ???
         //TODO: correct (random) start destination (first or last) + correct (random) start current_station

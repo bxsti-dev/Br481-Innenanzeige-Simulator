@@ -28,6 +28,10 @@ window.addEventListener("load", async function() {
     await load_json();
 
 
+    // control variabels
+    var mode = "scroll_loop"; // scroll_loop, scroll_stop, static
+    var text = "";
+
 
     function draw(){
         if(canvas.getContext){
@@ -63,7 +67,7 @@ window.addEventListener("load", async function() {
                 }
             }
 
-            add_spaces(1);
+            add_spaces(1); //TODO: Necessary? or only push character: " "
         }
     }
 
@@ -77,21 +81,35 @@ window.addEventListener("load", async function() {
     }
 
 
-    add_characters("S2 nach Lichtenrade");
-    // add_spaces(2);
+    // control (todo: from input file)
+    mode = "scroll_loop";
+    text = "S 2 nach Lichtenrade" + " ".repeat(19) + "Nächste Stationen:" + " ".repeat(3);
+    //TODO: add next stations (from input.js ? (set text only in input.js ?))
+    add_characters(text);
 
 
-    function shift_matrix(){
-        for(var y = 0;y<7;y++){
-            data[y].shift();
-            if(data[0].length <= 145){ // no overflow
-                data[y].push(0); 
+    function update(){
+        // SCROLLING WITH INFINITE LOOP //
+        if (mode == "scroll_loop"){
+            for(var y = 0;y<7;y++){
+                data[y].shift();
+                data[y].push(data[y][144]);
             }
         }
         
+        // SCROLLING WITH STOP IN CENTER //
+        if (mode == "scroll_stop"){
+
+        }
+
+        // STATIC CENTERED TEXT //
+        if (mode == "static"){
+
+        }
+
         draw();
-        setTimeout(shift_matrix, 40);
+        setTimeout(update, 40);
     }
 
-    setTimeout(shift_matrix, 40); //use setInterval ??
+    setTimeout(update, 40);
 });
