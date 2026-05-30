@@ -64,6 +64,7 @@ window.addEventListener("load", async function() {
         //destination_select.value = Object.keys(stations)[-1]; //random first || last ???
         //current_station_select.value = "";                    //random               ???
         //TODO: correct (random) start destination (first or last) + correct (random) start current_station
+        //TODO: don't choose current station same as destination
 
         selection_changed();
     }
@@ -75,34 +76,48 @@ window.addEventListener("load", async function() {
         }catch{console.log("ERROR?");}
         
         // Get next stations
-        //TODO: Get next Stations based on destination!!!! (back,forward,early end in the middle) !!!!!!!!!!!!!!!!!
         var next_stations = "";
 
-        if(stations[line_select.value].indexOf(current_station_select.value)+1 == stations[line_select.value].length-1){
+        const current_index = stations[line_select.value].indexOf(current_station_select.value);
+        const destination_index = stations[line_select.value].indexOf(destination_select.value);
+        var direction = 0;
+
+        if(Math.abs(destination_index - current_index) == 1){
             next_stations += "Nächste Station: ";
-        }else if(stations[line_select.value].indexOf(current_station_select.value)+1 < stations[line_select.value].length-1){
+        }else if(Math.abs(destination_index - current_index) > 1){
             next_stations += "Nächste Stationen: ";
         }else{}
 
-        const current_index = stations[line_select.value].indexOf(current_station_select.value);
+        if(destination_index > current_index){
+            direction = 1;
+        }
+        if(destination_index < current_index){
+            direction = -1;
+        }
 
         for(var i = 1;i<4;i++){
-            if(stations[line_select.value][current_index+i] != undefined){
-                next_stations += stations[line_select.value][current_index+i];
+            if(stations[line_select.value][current_index+(direction*i)] != undefined){
+                if(!((direction==1 && current_index+(direction*i) > destination_index) || (direction==-1 && current_index+(direction*i) < destination_index))){
+                    next_stations += stations[line_select.value][current_index+(direction*i)];
 
-                if(i != 3 && stations[line_select.value][current_index+i+1] != undefined){
-                    next_stations += ", ";
+                    if(i != 3 && stations[line_select.value][current_index+(direction*i)+direction] != undefined && !((direction==1 && current_index+(direction*i+direction) > destination_index) || (direction==-1 && current_index+(direction*i+direction) < destination_index))){
+                        next_stations += ", ";
+                    }
                 }
             }
         }
 
         // Set state
         state.mode = "scroll_loop";
-        state.text = "S " + line_select.value.replace("S","") +
-                    " nach " + destination_select.value +
-                    " ".repeat(19) +
-                    next_stations +
-                    " ".repeat(3); //TODO: Verify spaces?
+        
+        if(direction != 0){
+            state.text = "S " + line_select.value.replace("S","") +
+                        " nach " + destination_select.value +
+                        " ".repeat(19) +
+                        next_stations +
+                        " ".repeat(3); //TODO: Verify spaces?
+        }
+
         console.log(state.text);
 
         funcs.add_characters(state.text);
