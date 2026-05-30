@@ -75,12 +75,13 @@ window.addEventListener("load", async function() {
         }catch{console.log("ERROR?");}
         
         // Get next stations
+        //TODO: Get next Stations based on destination!!!! (back,forward,early end in the middle) !!!!!!!!!!!!!!!!!
         var next_stations = "";
 
         if(stations[line_select.value].indexOf(current_station_select.value)+1 == stations[line_select.value].length-1){
-            next_stations += "Nächste Station:" + " ".repeat(3);
+            next_stations += "Nächste Station: ";
         }else if(stations[line_select.value].indexOf(current_station_select.value)+1 < stations[line_select.value].length-1){
-            next_stations += "Nächste Stationen:" + " ".repeat(3);
+            next_stations += "Nächste Stationen: ";
         }else{}
 
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
@@ -102,6 +103,7 @@ window.addEventListener("load", async function() {
                     " ".repeat(19) +
                     next_stations +
                     " ".repeat(3); //TODO: Verify spaces?
+        console.log(state.text);
 
         funcs.add_characters(state.text);
     }
