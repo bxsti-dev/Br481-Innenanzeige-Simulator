@@ -1,9 +1,13 @@
+import {state, funcs} from "./main.js"
+
 window.addEventListener("load", async function() {
     var line_select = document.getElementById("line");
     var destination_select = document.getElementById("destination");
     var current_station_select = document.getElementById("current_station");
 
     line_select.addEventListener("change", line_changed);
+    destination_select.addEventListener("change", selection_changed);
+    current_station_select.addEventListener("change", selection_changed);
 
     // load station data
     let stations = {};
@@ -22,7 +26,7 @@ window.addEventListener("load", async function() {
         line_select.add(new_option);
     }
 
-
+    
     function line_changed(){
         var current_line = line_select.value;
         change_line(current_line);
@@ -61,10 +65,24 @@ window.addEventListener("load", async function() {
         //current_station_select.value = "";                    //random               ???
         //TODO: correct (random) start destination (first or last) + correct (random) start current_station
 
-        //TODO: send trigger to main.js > change matrix based on selection
+        selection_changed();
     }
 
 
-    change_line("S1") // random?
+    function selection_changed(){
+        funcs.clear_matrix();
+        
+        state.mode = "scroll_loop";
+        state.text = "S " + line_select.value.replace("S","") +
+                    " nach " + destination_select.value +
+                    " ".repeat(19) +
+                    "Nächste Stationen:" +
+                    " ".repeat(3);
 
+        funcs.add_characters(state.text);
+    }
+
+
+    // start values
+    change_line("S1") // random?
 });

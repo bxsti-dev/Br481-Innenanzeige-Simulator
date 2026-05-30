@@ -1,3 +1,9 @@
+export var state = {
+    mode: "scroll_loop", // scroll_loop, scroll_stop, static
+    text: ""
+}
+export var funcs = {};
+
 window.addEventListener("load", async function() {
     const matrix = document.getElementById("matrix");
     const canvas = document.getElementById("canvas");
@@ -11,7 +17,7 @@ window.addEventListener("load", async function() {
     canvas.height = (matrix.clientWidth / 145) * 7;   // set canvas height
 
     // create empty data 2d array
-    data = [];
+    var data = [];
     for(var fill_y = 0;fill_y<7;fill_y++){
         data[fill_y] = [];
         for(var fill_x = 0;fill_x<145;fill_x++){
@@ -26,11 +32,6 @@ window.addEventListener("load", async function() {
         font = await font_res.json();
     }
     await load_json();
-
-
-    // control variabels
-    var mode = "scroll_loop"; // scroll_loop, scroll_stop, static
-    var text = "";
 
 
     function draw(){
@@ -58,6 +59,17 @@ window.addEventListener("load", async function() {
     draw();
 
 
+    function clear_matrix(){
+        data = [[],[],[],[],[],[],[]];
+        for(var y = 0;y<7;y++){
+            for(var x = 0;x<145;x++){
+                data[y][x] = 0;
+            }
+        }
+    }
+    funcs.clear_matrix = clear_matrix; // export function -> call from input.js
+
+
     function add_characters(characters){
         for(var i = 0;i<characters.length;i++){
             
@@ -67,30 +79,24 @@ window.addEventListener("load", async function() {
                 }
             }
 
-            add_spaces(1); //TODO: Necessary? or only push character: " "
+            add_spaces(1);
         }
     }
+    funcs.add_characters = add_characters; // export function -> call from input.js
 
 
-    function add_spaces(number_of_space){
+    function add_spaces(number_of_spaces){
         for(var y = 0;y<7;y++){
-            for(var x = 0;x<number_of_space;x++){
+            for(var x = 0;x<number_of_spaces;x++){
                 data[y].push(0);
             }
         }
     }
 
 
-    // control (todo: from input file)
-    mode = "scroll_loop";
-    text = "S 2 nach Lichtenrade" + " ".repeat(19) + "Nächste Stationen:" + " ".repeat(3);
-    //TODO: add next stations (from input.js ? (set text only in input.js ?))
-    add_characters(text);
-
-
     function update(){
         // SCROLLING WITH INFINITE LOOP //
-        if (mode == "scroll_loop"){
+        if (state.mode == "scroll_loop"){
             for(var y = 0;y<7;y++){
                 data[y].shift();
                 data[y].push(data[y][144]);
@@ -98,12 +104,12 @@ window.addEventListener("load", async function() {
         }
         
         // SCROLLING WITH STOP IN CENTER //
-        if (mode == "scroll_stop"){
+        if (state.mode == "scroll_stop"){
 
         }
 
         // STATIC CENTERED TEXT //
-        if (mode == "static"){
+        if (state.mode == "static"){
 
         }
 
