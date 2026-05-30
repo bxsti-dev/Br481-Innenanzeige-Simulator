@@ -69,7 +69,7 @@ window.addEventListener("load", async function() {
     }
     funcs.clear_matrix = clear_matrix; // export function -> call from input.js
 
-
+    //TODO: Add /,(,) to font.json
     function add_characters(characters){
         for(var i = 0;i<characters.length;i++){
             

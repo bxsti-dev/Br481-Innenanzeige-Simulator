@@ -70,14 +70,38 @@ window.addEventListener("load", async function() {
 
 
     function selection_changed(){
-        funcs.clear_matrix();
+        try{
+            funcs.clear_matrix();
+        }catch{console.log("ERROR?");}
         
+        // Get next stations
+        var next_stations = "";
+
+        if(stations[line_select.value].indexOf(current_station_select.value)+1 == stations[line_select.value].length-1){
+            next_stations += "Nächste Station:" + " ".repeat(3);
+        }else if(stations[line_select.value].indexOf(current_station_select.value)+1 < stations[line_select.value].length-1){
+            next_stations += "Nächste Stationen:" + " ".repeat(3);
+        }else{}
+
+        const current_index = stations[line_select.value].indexOf(current_station_select.value);
+
+        for(var i = 1;i<4;i++){
+            if(stations[line_select.value][current_index+i] != undefined){
+                next_stations += stations[line_select.value][current_index+i];
+
+                if(i != 3 && stations[line_select.value][current_index+i+1] != undefined){
+                    next_stations += ", ";
+                }
+            }
+        }
+
+        // Set state
         state.mode = "scroll_loop";
         state.text = "S " + line_select.value.replace("S","") +
                     " nach " + destination_select.value +
                     " ".repeat(19) +
-                    "Nächste Stationen:" +
-                    " ".repeat(3);
+                    next_stations +
+                    " ".repeat(3); //TODO: Verify spaces?
 
         funcs.add_characters(state.text);
     }
