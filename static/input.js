@@ -12,7 +12,7 @@ window.addEventListener("load", async function() {
     // load station data
     let stations = {};
     async function load_json(){
-        const font_res = await fetch("/static/data/stations.json");
+        const font_res = await fetch("./static/data/stations.json");
         stations = await font_res.json();
     }
     await load_json();

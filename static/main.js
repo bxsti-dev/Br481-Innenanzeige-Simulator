@@ -28,7 +28,7 @@ window.addEventListener("load", async function() {
     // load json
     let font = {};
     async function load_json(){
-        const font_res = await fetch("/static/data/font.json");
+        const font_res = await fetch("./static/data/font.json");
         font = await font_res.json();
     }
     await load_json();
