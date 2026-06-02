@@ -2,6 +2,8 @@ body {
     background-color: #282d37;
 }
 
+/**************************************/
+
 #matrix_frame {
     position: absolute;
     top:50%;
@@ -25,6 +27,8 @@ body {
     margin-right: 2%;
 }
 
+/**************************************/
+
 #control_box {
     position: absolute;
     bottom: 0;
@@ -34,13 +38,25 @@ body {
 
     margin: 20px;
 
-    /* background-color: red; */
+    background-color: #252933;
+    padding: 20px;
+    border-radius: 5px;
+    border-color: #20252e;
+    border-style: solid;
+    border-width: 3px;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+#destination_box{
+    flex-direction: row;
+    padding: 10px;
+}
+
+/**************************************/
 
 select {
     background-color: #20252e;
@@ -52,4 +68,19 @@ select {
     font-size: larger;
 
     padding: 5px;
+}
+
+button {
+    background-color: #20252e;
+    color: #ffffff;
+
+    border-color: #373c45;
+    border-style: solid;
+    border-radius: 4px;
+
+    font-size: large;
+
+    padding: 5px;
+
+    cursor: pointer;
 }
