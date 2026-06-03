@@ -4,6 +4,25 @@ body {
 
 /**************************************/
 
+.arrow{
+    width: 10px;
+    height: 10px;
+    
+    border-style: solid;
+    border-width: 4px;
+    border-left: none;
+    border-bottom: none;
+    
+    transform: rotate(45deg) scale(0.6);
+    
+    margin-left: 5px;
+    margin-right: 5px;
+
+    border-color: white;
+  }
+
+/**************************************/
+
 #matrix_frame {
     position: absolute;
     top:50%;
