@@ -136,13 +136,17 @@ button {
 
     transition: 0.2s;
 }
-button:hover{
+button:hover:enabled{
     background-color: #171b21;
     border-color: #646c7b;
     cursor: pointer;
 }
-button:active{
+button:active:enabled{
     background-color: #343c4a;
+}
+button:disabled{
+    color: #828282;
+    cursor: not-allowed;
 }
 
 input[type="checkbox"]{

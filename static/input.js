@@ -4,10 +4,15 @@ window.addEventListener("load", async function() {
     var line_select = document.getElementById("line");
     var destination_select = document.getElementById("destination");
     var current_station_select = document.getElementById("current_station");
+    var previous_station_button = document.getElementById("previous_station_button");
+    var next_station_button = document.getElementById("next_station_button");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
     current_station_select.addEventListener("change", selection_changed);
+    previous_station_button.addEventListener("click", previous_station);
+    next_station_button.addEventListener("click", next_station);
+
 
     // load station data
     let stations = {};
@@ -75,7 +80,7 @@ window.addEventListener("load", async function() {
             funcs.clear_matrix();
         }catch{console.log("ERROR?");}
         
-        // Get next stations
+        // Get next stations + make string
         var next_stations = "";
 
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
@@ -107,6 +112,17 @@ window.addEventListener("load", async function() {
             }
         }
 
+        // Update disable button state
+        if(current_index+1 == 1){
+            previous_station_button.disabled = true;
+        }
+        else if(current_index+1 == stations[line_select.value].length){
+            next_station_button.disabled = true;
+        }else{
+            previous_station_button.disabled = false;
+            next_station_button.disabled = false;
+        }
+
         // Set state
         state.mode = "scroll_loop";
         
@@ -122,6 +138,18 @@ window.addEventListener("load", async function() {
 
         funcs.add_characters(state.text);
     }
+
+    
+    function previous_station(){
+        const current_index = stations[line_select.value].indexOf(current_station_select.value);
+        current_station_select.value = stations[line_select.value][current_index-1]
+        selection_changed() 
+    }
+    function next_station(){
+        const current_index = stations[line_select.value].indexOf(current_station_select.value);
+        current_station_select.value = stations[line_select.value][current_index+1]
+        selection_changed()
+    }   
 
 
     // start values
