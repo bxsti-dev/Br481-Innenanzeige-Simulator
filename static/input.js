@@ -126,31 +126,31 @@ window.addEventListener("load", async function() {
         }
 
         // Set state
-        state.mode = "scroll_loop";
-        
-        if(direction != 0){
-            state.text = "S " + line_select.value.replace("S","") +
-                        " nach " + destination_select.value +
-                        " ".repeat(19) +
-                        next_stations +
-                        " ".repeat(3); //TODO: Verify spaces?
+        if(state.mode == "scroll_loop"){
+            if(direction != 0){
+                state.text = "S " + line_select.value.replace("S","") +
+                            " nach " + destination_select.value +
+                            " ".repeat(19) +
+                            next_stations +
+                            " ".repeat(3); //TODO: Verify spaces?
+            }
+    
+            console.log(state.text);
+            funcs.add_characters(state.text);
         }
 
-        console.log(state.text);
-
-        funcs.add_characters(state.text);
     }
 
 
     function previous_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][current_index-1]
-        selection_changed() 
+        current_station_select.value = stations[line_select.value][current_index-1];
+        selection_changed();
     }
     function next_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][current_index+1]
-        selection_changed()
+        current_station_select.value = stations[line_select.value][current_index+1];
+        selection_changed();
     }   
 
 
@@ -168,7 +168,6 @@ window.addEventListener("load", async function() {
             selection_changed();
         }
     }
-
 
     // start values
     change_line("S1") // random?
