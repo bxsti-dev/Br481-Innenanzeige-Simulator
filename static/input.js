@@ -6,12 +6,14 @@ window.addEventListener("load", async function() {
     var current_station_select = document.getElementById("current_station");
     var previous_station_button = document.getElementById("previous_station_button");
     var next_station_button = document.getElementById("next_station_button");
+    var toggle_state_button = document.getElementById("toggle_state_button");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
     current_station_select.addEventListener("change", selection_changed);
     previous_station_button.addEventListener("click", previous_station);
     next_station_button.addEventListener("click", next_station);
+    toggle_state_button.addEventListener("click", toggle_state);
 
 
     // load station data
@@ -139,7 +141,7 @@ window.addEventListener("load", async function() {
         funcs.add_characters(state.text);
     }
 
-    
+
     function previous_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
         current_station_select.value = stations[line_select.value][current_index-1]
@@ -150,6 +152,22 @@ window.addEventListener("load", async function() {
         current_station_select.value = stations[line_select.value][current_index+1]
         selection_changed()
     }   
+
+
+    function toggle_state(){
+        if(toggle_state_button.innerHTML == '"Nächste Station" zeigen'){
+            toggle_state_button.innerHTML = 'Lauftext duchlaufen starten';
+
+            funcs.clear_matrix();
+            state.mode = "scroll_stop";
+        }else{
+            toggle_state_button.innerHTML = '"Nächste Station" zeigen';
+
+            funcs.clear_matrix();
+            state.mode = "scroll_loop";
+            selection_changed();
+        }
+    }
 
 
     // start values
