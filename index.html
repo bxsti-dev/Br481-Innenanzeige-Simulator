@@ -18,13 +18,33 @@
     </div>
 
     <div id="control_box">
+
         <div id="destination_box">
             <select name="line" id="line"></select>
             <div class="arrow"></div>
             <select name="destination" id="destination"></select>
         </div>
 
-        <select name="current_station" id="current_station"></select>
+        <div id="current_box">
+            <div class="checkbox_wrapper">
+                <label for="left_checkbox">Aussteig links</label>
+                <input type="checkbox" name="left_checkbox" id="left_checkbox" class="checkbox">
+            </div>
+            
+            <select name="current_station" id="current_station"></select>
+
+            <div class="checkbox_wrapper">
+                <input type="checkbox" name="right_checkbox" id="right_checkbox" class="checkbox">
+                <label for="right_checkbox">Aussteig rechts</label>
+            </div>
+        </div>
+
+        <div id="modes_box">
+            <button>< Station zurück</button>
+            <button>"Nächste Station" zeigen</button>
+            <button>Station weiter ></button>
+        </div>
+
         
         <!--
         checkbox: selftest,left,right

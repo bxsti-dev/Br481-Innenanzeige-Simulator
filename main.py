@@ -4,7 +4,8 @@ log = logging.getLogger("werkzeug")
 log.setLevel(logging.ERROR)
 app = Flask(__name__, template_folder=".", static_folder="static")
 
-print("\nRunning on: http://127.0.0.1:5000\nPress CTRL+C to quit\n")
+print("\n"+"*"*40)
+print("Running on: http://127.0.0.1:5000\nPress CTRL+C to quit\n")
 
 @app.route("/")
 def home():
@@ -15,4 +16,6 @@ def home():
 
 if __name__ == '__main__':
     #threading.Timer(1.0, open_browser).start()
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True) #debug=False
+
+#TODO: rewrite without flask (python http server) ?? 
