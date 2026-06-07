@@ -1,6 +1,10 @@
 export var state = {
     mode: "scroll_loop", // scroll_loop, scroll_stop, static
-    text: ""
+    text: "",
+    scroll_counter: 0,
+    current_station: "",
+    exit_left: false,
+    exit_right: false
 }
 export var funcs = {};
 
@@ -94,6 +98,49 @@ window.addEventListener("load", async function() {
     }
 
 
+    function get_character_length(characters){
+        return ((characters.length*5)+(characters.length*1))-1;
+    }
+
+
+    function set_characters(start_x,characters){
+        var cursor = 0;
+
+        for(var i = 0;i<characters.length;i++){
+
+            for(var y = 0;y<7;y++){
+                for(var x = 0;x<5;x++){
+                    data[y].splice(start_x+cursor,5, ...font[characters[i]][y]);
+                }
+            }
+            cursor+=6;
+        }
+    }
+
+
+    function show_arrow(direction){
+        for(var y = 0;y<7;y++){                         
+            if(direction == "left"){
+                data[y].splice(0,5,...font["left"][y]);
+                data[y].splice(140,5,...font[" "][y]);
+            }
+            if(direction == "right"){
+                data[y].splice(0,5,...font[" "][y]);
+                data[y].splice(140,5,...font["right"][y]);
+
+            }
+            if(direction == "both"){
+                data[y].splice(0,5,...font["left"][y]);
+                data[y].splice(140,5,...font["right"][y]);
+            }
+            if(direction == "none"){
+                data[y].splice(0,5,...font[" "][y]);
+                data[y].splice(140,5,...font[" "][y]);
+            }
+        }
+    }
+
+
     function update(){
         // SCROLLING WITH INFINITE LOOP //
         if (state.mode == "scroll_loop"){
@@ -105,17 +152,44 @@ window.addEventListener("load", async function() {
         
         // SCROLLING WITH STOP IN CENTER //
         if (state.mode == "scroll_stop"){
+            state.scroll_counter += 1;
 
+            if(state.scroll_counter < 123){
+                for(var y = 0;y<7;y++){
+                    data[y].shift();
+                    data[y].push(0);
+                }
+            }
+            if(state.scroll_counter == parseInt(145-((145/2)-(get_character_length("Nächste Station:")/2)))){
+                setTimeout(function(){
+                    clear_matrix();
+                    state.mode = "static";
+                }, 2000);
+            }
         }
 
         // STATIC CENTERED TEXT //
         if (state.mode == "static"){
+            var center_start = ((145/2)-(get_character_length(state.current_station)/2))
+            set_characters(center_start,state.current_station);
 
+            if(state.exit_left == true && state.exit_right == true){
+                show_arrow("both");
+            }
+            if(state.exit_left == true && state.exit_right == false){
+                show_arrow("left");
+            }
+            if(state.exit_left == false && state.exit_right == true){
+                show_arrow("right");
+            }
+            if(state.exit_left == false && state.exit_right == false){
+                show_arrow("none");
+            }
         }
 
         draw();
-        setTimeout(update, 40);
+        setTimeout(update, 35);
     }
 
-    setTimeout(update, 40);
+    setTimeout(update, 35);
 });

@@ -7,6 +7,8 @@ window.addEventListener("load", async function() {
     var previous_station_button = document.getElementById("previous_station_button");
     var next_station_button = document.getElementById("next_station_button");
     var toggle_state_button = document.getElementById("toggle_state_button");
+    var left_checkbox = document.getElementById("left_checkbox");
+    var right_checkbox = document.getElementById("right_checkbox");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
@@ -14,6 +16,8 @@ window.addEventListener("load", async function() {
     previous_station_button.addEventListener("click", previous_station);
     next_station_button.addEventListener("click", next_station);
     toggle_state_button.addEventListener("click", toggle_state);
+    left_checkbox.addEventListener("change", exit_change);
+    right_checkbox.addEventListener("change", exit_change);
 
 
     // load station data
@@ -130,7 +134,7 @@ window.addEventListener("load", async function() {
             if(direction != 0){
                 state.text = "S " + line_select.value.replace("S","") +
                             " nach " + destination_select.value +
-                            " ".repeat(19) +
+                            " ".repeat(17) +
                             next_stations +
                             " ".repeat(3); //TODO: Verify spaces?
             }
@@ -140,6 +144,12 @@ window.addEventListener("load", async function() {
         }
 
     }
+
+    function exit_change(){
+        state.exit_left = left_checkbox.checked;
+        state.exit_right = right_checkbox.checked;
+    }
+    exit_change();
 
 
     function previous_station(){
@@ -159,6 +169,9 @@ window.addEventListener("load", async function() {
             toggle_state_button.innerHTML = 'Lauftext duchlaufen starten';
 
             funcs.clear_matrix();
+            funcs.add_characters("Nächste Station:");
+            state.current_station = current_station_select.value;
+            state.scroll_counter = 0;
             state.mode = "scroll_stop";
         }else{
             toggle_state_button.innerHTML = '"Nächste Station" zeigen';
@@ -170,5 +183,5 @@ window.addEventListener("load", async function() {
     }
 
     // start values
-    change_line("S1") // random?
+    change_line("S1"); // random?
 });
