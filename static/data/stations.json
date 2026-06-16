@@ -7,6 +7,9 @@
     "Bornholmer Straße", "Wollankstraße", "Schönholz", "Wilhelmsruh", "Wittenau", "Waidmannslust", 
     "Hermsdorf", "Frohnau", "Hohen Neuendorf", "Birkenwerder", "Borgsdorf", "Lehnitz", "Oranienburg"
   ],
+  "S15": [
+    "Hauptbahnhof", "Wedding", "Gesundbrunnen"
+  ],
   "S2": [
     "Blankenfelde", "Mahlow", "Lichtenrade", "Schichauweg", "Buckower Chaussee", "Marienfelde", 
     "Attilastraße", "Priesterweg", "Südkreuz", "Yorckstraße", "Anhalter Bahnhof", "Potsdamer Platz", 
