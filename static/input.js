@@ -131,6 +131,14 @@ window.addEventListener("load", async function() {
             next_station_button.disabled = false;
         }
 
+        // Restart matrix while 'scroll_stop' when state changes
+        if(state.mode == "scroll_stop"){
+            funcs.clear_matrix();
+            funcs.add_characters("Nächste Station:");
+            state.scroll_counter = 0;
+            state.mode = "scroll_stop";
+        }
+
         // Set state
         if(state.mode == "scroll_loop"){
             if(direction != 0){
