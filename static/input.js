@@ -89,6 +89,7 @@ window.addEventListener("load", async function() {
         // Get next stations + make string
         var next_stations = "";
 
+        state.current_station = current_station_select.value;
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
         const destination_index = stations[line_select.value].indexOf(destination_select.value);
         var direction = 0;
@@ -171,7 +172,6 @@ window.addEventListener("load", async function() {
 
             funcs.clear_matrix();
             funcs.add_characters("Nächste Station:");
-            state.current_station = current_station_select.value;
             state.scroll_counter = 0;
             state.mode = "scroll_stop";
         }else{
