@@ -119,13 +119,14 @@ window.addEventListener("load", async function() {
         }
 
         // Update disable button state
-        if(current_index+1 == 1){
+        if(current_index == 0){
             previous_station_button.disabled = true;
-        }
-        else if(current_index+1 == stations[line_select.value].length){
-            next_station_button.disabled = true;
         }else{
             previous_station_button.disabled = false;
+        }
+        if(current_index+1 == stations[line_select.value].length){
+            next_station_button.disabled = true;
+        }else{
             next_station_button.disabled = false;
         }
 
