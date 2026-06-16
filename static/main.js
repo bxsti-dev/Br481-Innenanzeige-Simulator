@@ -16,7 +16,6 @@ window.addEventListener("load", async function() {
     var matrix_height = pixel_space * 7;
 
     matrix.style = "height: " + matrix_height + "px"; // set matrix height
-
     canvas.width = matrix.clientWidth;                // set canvas width
     canvas.height = (matrix.clientWidth / 145) * 7;   // set canvas height
 
@@ -41,6 +40,14 @@ window.addEventListener("load", async function() {
     function draw(){
         if(canvas.getContext){
             const ctx = canvas.getContext("2d");
+
+            pixel_space = matrix.clientWidth / 145;
+            matrix_height = pixel_space * 7;
+
+            matrix.style = "height: " + matrix_height + "px"; // update matrix height
+            canvas.width = matrix.clientWidth;                // update canvas width
+            canvas.height = matrix_height;                    // update canvas height
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             for(var y = 0;y<7;y++){
