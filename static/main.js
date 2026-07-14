@@ -134,7 +134,6 @@ window.addEventListener("load", async function() {
             if(direction == "right"){
                 data[y].splice(0,5,...font[" "][y]);
                 data[y].splice(140,5,...font["right"][y]);
-
             }
             if(direction == "both"){
                 data[y].splice(0,5,...font["left"][y]);
@@ -171,7 +170,7 @@ window.addEventListener("load", async function() {
                 setTimeout(function(){
                     clear_matrix();
                     state.mode = "static";
-                }, 2000);
+                }, 2000); //TODO: Adjust time?
             }
         }
 
@@ -195,8 +194,8 @@ window.addEventListener("load", async function() {
         }
 
         draw();
-        setTimeout(update, 35);
+        setTimeout(update, 35); //TODO: Adjustable speed + IRL speed
     }
 
-    setTimeout(update, 35);
+    setTimeout(update, 35); //TODO: Adjustable speed + IRL speed
 });

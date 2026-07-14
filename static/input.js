@@ -97,7 +97,7 @@ window.addEventListener("load", async function() {
         if(Math.abs(destination_index - current_index) == 1){
             next_stations += "Nächste Station: ";
         }else if(Math.abs(destination_index - current_index) > 1){
-            next_stations += "Nächste Stationen: ";
+            next_stations += "Nächste Stationen ";
         }else{}
 
         if(destination_index > current_index){
@@ -144,7 +144,7 @@ window.addEventListener("load", async function() {
             if(direction != 0){
                 state.text = "S " + line_select.value.replace("S","") +
                             " nach " + destination_select.value +
-                            " ".repeat(17) +
+                            " ".repeat(17) + //TODO: Verify spaces?
                             next_stations +
                             " ".repeat(3); //TODO: Verify spaces?
             }
