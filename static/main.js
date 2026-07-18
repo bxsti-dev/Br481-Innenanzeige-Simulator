@@ -1,5 +1,6 @@
 export var state = {
     mode: "scroll_loop", // scroll_loop, scroll_stop, static
+    scroll_speed: 19,    //old slow: 35 - realistic: 18,19
     text: "",
     scroll_counter: 0,
     current_station: "",
@@ -170,7 +171,7 @@ window.addEventListener("load", async function() {
                 setTimeout(function(){
                     clear_matrix();
                     state.mode = "static";
-                }, 2000); //TODO: Adjust time?
+                }, 1200);
             }
         }
 
@@ -194,8 +195,8 @@ window.addEventListener("load", async function() {
         }
 
         draw();
-        setTimeout(update, 35); //TODO: Adjustable speed + IRL speed
+        setTimeout(update, state.scroll_speed);
     }
 
-    setTimeout(update, 35); //TODO: Adjustable speed + IRL speed
+    setTimeout(update, state.scroll_speed);
 });
