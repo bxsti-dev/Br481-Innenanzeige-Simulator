@@ -1,6 +1,6 @@
 export var state = {
     mode: "scroll_loop", // scroll_loop, scroll_stop, static
-    scroll_speed: 19,    //old slow: 35 - realistic: 18,19
+    scroll_speed: 18,    //old slow: 35 - realistic: 18,19
     text: "",
     scroll_counter: 0,
     current_station: "",
