@@ -67,15 +67,10 @@ window.addEventListener("load", async function() {
             destination_select.add(new_destination);
         }
 
-        // set random start values
+        // set start values
         line_select.value = line;
-        // console.log(Object.keys(stations));
-        // console.log(stations["S1"]);
-        // console.log(stations[line].length);
-        //destination_select.value = Object.keys(stations)[-1]; //random first || last ???
-        //current_station_select.value = "";                    //random               ???
-        //TODO: correct (random) start destination (first or last) + correct (random) start current_station
-        //TODO: don't choose current station same as destination
+        destination_select.value = stations[line][stations[line].length-1];
+        current_station_select.value = stations[line][0];
 
         selection_changed();
     }
