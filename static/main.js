@@ -81,8 +81,8 @@ window.addEventListener("load", async function() {
     }
     funcs.clear_matrix = clear_matrix; // export function -> call from input.js
 
-    //TODO: Add /,(,) to font.json
-    function add_characters(characters){
+    
+    function add_characters(characters){ //TODO: Add /,(,) to font.json
         for(var i = 0;i<characters.length;i++){
             
             for(var y = 0;y<7;y++){
@@ -109,6 +109,7 @@ window.addEventListener("load", async function() {
     function get_character_length(characters){
         return ((characters.length*5)+(characters.length*1))-1;
     }
+    funcs.get_character_length = get_character_length; // export function -> call from input.js
 
 
     function set_characters(start_x,characters){
@@ -177,8 +178,8 @@ window.addEventListener("load", async function() {
 
         // STATIC CENTERED TEXT //
         if (state.mode == "static"){
-            var center_start = ((145/2)-(get_character_length(state.current_station)/2))
-            set_characters(center_start,state.current_station);
+            var center_start = ((145/2)-(get_character_length(state.text)/2))
+            set_characters(center_start,state.text);
 
             if(state.exit_left == true && state.exit_right == true){
                 show_arrow("both");

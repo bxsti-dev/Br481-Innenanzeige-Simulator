@@ -130,26 +130,33 @@ window.addEventListener("load", async function() {
         if(state.mode == "scroll_stop"){
             funcs.clear_matrix();
             funcs.add_characters("Nächste Station:");
+            state.text = get_current_station_string();
             state.scroll_counter = 0;
             state.mode = "scroll_stop";
         }
 
-        // Set state
+        // Also update current station text while in "static"
+        if(state.mode == "static"){
+            state.text = get_current_station_string();
+        }
+
+        // Set text on "scroll_loop"
         if(state.mode == "scroll_loop"){
             if(direction != 0){
                 state.text = "S " + line_select.value.replace("S","") +
                             " nach " + destination_select.value +
-                            " ".repeat(14) + //TODO: Verify spaces?
+                            " ".repeat(7) + //6?
                             next_stations +
-                            " ".repeat(3); //TODO: Verify spaces?
+                            " ".repeat(3);
+
+                console.log(state.text);
+                funcs.add_characters(state.text);
             }
-    
-            console.log(state.text);
-            funcs.add_characters(state.text);
         }
 
     }
 
+    
     function exit_change(){
         state.exit_left = left_checkbox.checked;
         state.exit_right = right_checkbox.checked;
@@ -166,13 +173,32 @@ window.addEventListener("load", async function() {
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
         current_station_select.value = stations[line_select.value][current_index+1];
         selection_changed();
-    }   
+    }
+
+
+    function get_current_station_string(){
+        if(current_station_select.value == destination_select.value){ // Endstation
+            if(funcs.get_character_length(current_station_select.value + " Endstation") <= 145-10){
+                return current_station_select.value + " Endstation";
+            }else{
+                if(funcs.get_character_length(current_station_select.value + " Endst.") <= 145-10){
+                    return current_station_select.value + " Endst.";
+                }else{
+                    return current_station_select.value;
+                }   
+            }
+
+        }else{ // Keine Endstation
+            return current_station_select.value;
+        }
+    }
 
 
     function toggle_state(){
         if(toggle_state_button.innerHTML == '"Nächste Station" zeigen'){
             toggle_state_button.innerHTML = 'Lauftext duchlaufen starten';
 
+            state.text = get_current_station_string();
             funcs.clear_matrix();
             funcs.add_characters("Nächste Station:");
             state.scroll_counter = 0;
