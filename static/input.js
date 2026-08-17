@@ -19,6 +19,8 @@ window.addEventListener("load", async function() {
     left_checkbox.addEventListener("change", exit_change);
     right_checkbox.addEventListener("change", exit_change);
 
+    var is_ring = false;
+
 
     // load station data
     let stations = {};
@@ -67,10 +69,21 @@ window.addEventListener("load", async function() {
             destination_select.add(new_destination);
         }
 
+        // Add extra "Ring" to destinations for S41/S42
+        if(line == "S41" || line == "S42"){ 
+            var new_destination = document.createElement("option");
+            new_destination.text = "Ring (ohne Endziel)";
+            new_destination.value = "Ring";
+            destination_select.add(new_destination, destination_select.options[0]);
+            is_ring = true;
+        }else{
+            is_ring = false;
+        }
+
         // set start values
         line_select.value = line;
-        destination_select.value = stations[line][stations[line].length-1];
         current_station_select.value = stations[line][0];
+        destination_select.value = (line == "S41" || line == "S42") ? "Ring" : stations[line][stations[line].length-1]
 
         selection_changed();
     }
@@ -82,6 +95,8 @@ window.addEventListener("load", async function() {
         }catch{console.log("ERROR?");}
         
         // Get next stations + make string
+
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
         var next_stations = "";
 
         state.current_station = current_station_select.value;
@@ -113,6 +128,101 @@ window.addEventListener("load", async function() {
                 }
             }
         }
+        console.log("1. ############");
+        console.log(next_stations);
+        var old_temp = next_stations;
+        console.log("1. ############");
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+        var next_stations = "";
+
+        state.current_station = current_station_select.value;
+        // const
+        // const
+        var direction = 0;
+
+        // set current direction
+        if(is_ring){
+            direction = 1;
+        }else{
+            if(destination_index > current_index){
+                direction = 1;
+            }
+            if(destination_index < current_index){
+                direction = -1;
+            }
+        }
+
+        // Choose right start of String
+        if((Math.abs(destination_index - current_index) == 1) && destination_select.value != "Ring"){ // in case ring has a fixed destination
+            next_stations += "Nächste Station : ";
+        }else if((Math.abs(destination_index - current_index) > 1) && destination_select.value != "Ring"){
+            next_stations += "Nächste Stationen ";
+        }else{
+            next_stations += "Nächste Stationen ";
+        }
+
+        // Make rest of String
+        for(var i = 1;i<4;i++){
+            var index = stations[line_select.value].indexOf(state.current_station); //TODO: ist das nicht das gleiche wie "current_index" ????????????
+            // console.log(index);
+
+            if(direction == 1){
+
+                if(destination_select.value != "Ring"){
+
+                    if(stations[line_select.value][index+i] != undefined && current_index+i <= destination_index){
+                        next_stations += stations[line_select.value][index+i]
+                    }
+
+                    if(i != 3 && stations[line_select.value][index+i+1] != undefined && current_index+i+1 <= destination_index){
+                        next_stations += ", ";
+                    }
+                }else{
+                    next_stations += stations[((index+i%5)+5)%5];
+
+                    if(i != 3){
+                        next_stations += ", ";
+                    }
+                }
+
+            }
+            if(direction == -1){
+
+                if(destination_select.value != "Ring"){
+
+                    if(stations[line_select.value][index-i] != undefined && current_index-i >= destination_index){
+                        next_stations += stations[line_select.value][index-i]
+                    }
+
+                    if(i != 3 && stations[line_select.value][index-i-1] != undefined && current_index-i-1 >= destination_index){
+                        next_stations += ", ";
+                    }
+                }else{
+                    next_stations += stations[((index-i%5)+5)%5];
+
+                    if(i != 3){
+                        next_stations += ", ";
+                    }
+                }
+
+            }
+        }
+
+        // TODO: Anzeige bleibt beim ersten code aus wenn Ziel und Current station gleich sind. (obwohl falsches ergebnis (3 mal zielbahnhof): beim neuen code bischen besser) === diese ausschalt bedinung ausmachen
+        // TODO: Beim neuen code auch nichts anzeigen wenn ziel und current gleich sind 
+
+        // TODO: Code optimieren
+
+
+        console.log("2. ############");
+        console.log(next_stations);
+        console.log("2. ############");
+        console.log("##################################################");
+        console.log(old_temp == next_stations);
+        //TODO: alten code vergleichen bis der neue gut ist und das gleiche tut wieder alte !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        console.log("##################################################");
+        //------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
         // Update disable button state
         if(current_index == 0){
