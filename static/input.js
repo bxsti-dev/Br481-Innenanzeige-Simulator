@@ -178,7 +178,7 @@ window.addEventListener("load", async function() {
                         next_stations += ", ";
                     }
                 }else{
-                    next_stations += stations[((index+i%5)+5)%5];
+                    next_stations += stations[line_select.value][((index+i%5)+5)%5];
 
                     if(i != 3){
                         next_stations += ", ";
@@ -198,7 +198,7 @@ window.addEventListener("load", async function() {
                         next_stations += ", ";
                     }
                 }else{
-                    next_stations += stations[((index-i%5)+5)%5];
+                    next_stations += stations[line_select.value][((index-i%5)+5)%5];
 
                     if(i != 3){
                         next_stations += ", ";
