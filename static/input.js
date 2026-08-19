@@ -131,7 +131,6 @@ window.addEventListener("load", async function() {
         console.log("1. ############");
         console.log(next_stations);
         var old_temp = next_stations;
-        console.log("1. ############");
         //------------------------------------------------------------------------------------------------------------------------------------------------------
         var next_stations = "";
 
@@ -163,22 +162,27 @@ window.addEventListener("load", async function() {
 
         // Make rest of String
         for(var i = 1;i<4;i++){
-            var index = stations[line_select.value].indexOf(state.current_station); //TODO: ist das nicht das gleiche wie "current_index" ????????????
-            // console.log(index);
 
             if(direction == 1){
 
+                console.log(current_index);
+                console.log(destination_index);
+
                 if(destination_select.value != "Ring"){
 
-                    if(stations[line_select.value][index+i] != undefined && current_index+i <= destination_index){
-                        next_stations += stations[line_select.value][index+i]
+                    console.log(stations[line_select.value][current_index+i]);
+                    console.log(stations[line_select.value][current_index+i] != undefined);
+                    console.log(current_index+i <= destination_index);
+
+                    if(stations[line_select.value][current_index+i] != undefined && current_index+i <= destination_index){
+                        next_stations += stations[line_select.value][current_index+i]
                     }
 
-                    if(i != 3 && stations[line_select.value][index+i+1] != undefined && current_index+i+1 <= destination_index){
+                    if(i != 3 && stations[line_select.value][current_index+i+1] != undefined && current_index+i+1 <= destination_index){
                         next_stations += ", ";
                     }
                 }else{
-                    next_stations += stations[line_select.value][((index+i%5)+5)%5];
+                    next_stations += stations[line_select.value][((current_index+i%5)+5)%5];
 
                     if(i != 3){
                         next_stations += ", ";
@@ -190,15 +194,15 @@ window.addEventListener("load", async function() {
 
                 if(destination_select.value != "Ring"){
 
-                    if(stations[line_select.value][index-i] != undefined && current_index-i >= destination_index){
-                        next_stations += stations[line_select.value][index-i]
+                    if(stations[line_select.value][current_index-i] != undefined && current_index-i >= destination_index){
+                        next_stations += stations[line_select.value][current_index-i]
                     }
 
-                    if(i != 3 && stations[line_select.value][index-i-1] != undefined && current_index-i-1 >= destination_index){
+                    if(i != 3 && stations[line_select.value][current_index-i-1] != undefined && current_index-i-1 >= destination_index){
                         next_stations += ", ";
                     }
                 }else{
-                    next_stations += stations[line_select.value][((index-i%5)+5)%5];
+                    next_stations += stations[line_select.value][((current_index-i%5)+5)%5];
 
                     if(i != 3){
                         next_stations += ", ";
@@ -216,11 +220,10 @@ window.addEventListener("load", async function() {
 
         console.log("2. ############");
         console.log(next_stations);
-        console.log("2. ############");
-        console.log("##################################################");
+        console.log("#############################");
         console.log(old_temp == next_stations);
         //TODO: alten code vergleichen bis der neue gut ist und das gleiche tut wieder alte !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        console.log("##################################################");
+        console.log("#############################");
         //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
