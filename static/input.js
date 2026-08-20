@@ -95,48 +95,10 @@ window.addEventListener("load", async function() {
         }catch{console.log("ERROR?");}
         
         // Get next stations + make string
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
         var next_stations = "";
-
         state.current_station = current_station_select.value;
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
         const destination_index = stations[line_select.value].indexOf(destination_select.value);
-        var direction = 0;
-
-        if(Math.abs(destination_index - current_index) == 1){
-            next_stations += "Nächste Station : ";
-        }else if(Math.abs(destination_index - current_index) > 1){
-            next_stations += "Nächste Stationen ";
-        }else{}
-
-        if(destination_index > current_index){
-            direction = 1;
-        }
-        if(destination_index < current_index){
-            direction = -1;
-        }
-
-        for(var i = 1;i<4;i++){
-            if(stations[line_select.value][current_index+(direction*i)] != undefined){
-                if(!((direction==1 && current_index+(direction*i) > destination_index) || (direction==-1 && current_index+(direction*i) < destination_index))){
-                    next_stations += stations[line_select.value][current_index+(direction*i)];
-
-                    if(i != 3 && stations[line_select.value][current_index+(direction*i)+direction] != undefined && !((direction==1 && current_index+(direction*i+direction) > destination_index) || (direction==-1 && current_index+(direction*i+direction) < destination_index))){
-                        next_stations += ", ";
-                    }
-                }
-            }
-        }
-        console.log("1. ############");
-        console.log(next_stations);
-        var old_temp = next_stations;
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
-        var next_stations = "";
-
-        state.current_station = current_station_select.value;
-        // const
-        // const
         var direction = 0;
 
         // set current direction
@@ -152,28 +114,32 @@ window.addEventListener("load", async function() {
         }
 
         // Choose right start of String
-        if((Math.abs(destination_index - current_index) == 1) && destination_select.value != "Ring"){ // in case ring has a fixed destination
+        const ring_length = stations[line_select.value].length;
+
+        if((Math.abs(destination_index - current_index) == 1) && is_ring == false){
             next_stations += "Nächste Station : ";
-        }else if((Math.abs(destination_index - current_index) > 1) && destination_select.value != "Ring"){
+        }else if((Math.abs(destination_index - current_index) > 1) && is_ring == false){
             next_stations += "Nächste Stationen ";
         }else{
-            next_stations += "Nächste Stationen ";
+            if(destination_select.value == "Ring"){
+                next_stations += "Nächste Stationen ";
+            }else{
+                var stations_left = ((destination_index-current_index)%ring_length+ring_length)%ring_length;
+
+                if(stations_left == 1){
+                    next_stations += "Nächste Station : ";
+                }else{
+                    next_stations += "Nächste Stationen ";
+                }
+            }
         }
 
         // Make rest of String
         for(var i = 1;i<4;i++){
 
-            if(direction == 1){
+            if(is_ring == false){
 
-                console.log(current_index);
-                console.log(destination_index);
-
-                if(destination_select.value != "Ring"){
-
-                    console.log(stations[line_select.value][current_index+i]);
-                    console.log(stations[line_select.value][current_index+i] != undefined);
-                    console.log(current_index+i <= destination_index);
-
+                if(direction == 1){
                     if(stations[line_select.value][current_index+i] != undefined && current_index+i <= destination_index){
                         next_stations += stations[line_select.value][current_index+i]
                     }
@@ -181,50 +147,47 @@ window.addEventListener("load", async function() {
                     if(i != 3 && stations[line_select.value][current_index+i+1] != undefined && current_index+i+1 <= destination_index){
                         next_stations += ", ";
                     }
-                }else{
-                    next_stations += stations[line_select.value][((current_index+i%5)+5)%5];
-
-                    if(i != 3){
-                        next_stations += ", ";
-                    }
                 }
-
-            }
-            if(direction == -1){
-
-                if(destination_select.value != "Ring"){
-
+                if(direction == -1){
                     if(stations[line_select.value][current_index-i] != undefined && current_index-i >= destination_index){
                         next_stations += stations[line_select.value][current_index-i]
                     }
-
+    
                     if(i != 3 && stations[line_select.value][current_index-i-1] != undefined && current_index-i-1 >= destination_index){
                         next_stations += ", ";
                     }
-                }else{
-                    next_stations += stations[line_select.value][((current_index-i%5)+5)%5];
+                }
 
+            }else{
+
+                if(destination_select.value == "Ring"){
+                    next_stations += stations[line_select.value][((current_index+i%ring_length)+ring_length)%ring_length];
+    
                     if(i != 3){
+                        next_stations += ", ";
+                    }
+                }else{
+                    var stations_left = ((destination_index-current_index-i)%ring_length+ring_length)%ring_length;
+
+                    next_stations += stations[line_select.value][((current_index+i%ring_length)+ring_length)%ring_length];
+
+                    if(stations_left <= 0){
+                        break;
+                    }
+
+                    if(i != 3 && stations_left > 0){
                         next_stations += ", ";
                     }
                 }
 
             }
+
         }
 
         // TODO: Anzeige bleibt beim ersten code aus wenn Ziel und Current station gleich sind. (obwohl falsches ergebnis (3 mal zielbahnhof): beim neuen code bischen besser) === diese ausschalt bedinung ausmachen
         // TODO: Beim neuen code auch nichts anzeigen wenn ziel und current gleich sind 
-
         // TODO: Code optimieren
-
-
-        console.log("2. ############");
         console.log(next_stations);
-        console.log("#############################");
-        console.log(old_temp == next_stations);
-        //TODO: alten code vergleichen bis der neue gut ist und das gleiche tut wieder alte !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        console.log("#############################");
-        //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
         // Update disable button state
