@@ -187,18 +187,23 @@ window.addEventListener("load", async function() {
         // TODO: Anzeige bleibt beim ersten code aus wenn Ziel und Current station gleich sind. (obwohl falsches ergebnis (3 mal zielbahnhof): beim neuen code bischen besser) === diese ausschalt bedinung ausmachen
         // TODO: Beim neuen code auch nichts anzeigen wenn ziel und current gleich sind 
         // TODO: Code optimieren
-        console.log(next_stations);
+        //console.log(next_stations);
 
 
         // Update disable button state
-        if(current_index == 0){
-            previous_station_button.disabled = true;
+        if(destination_select.value != "Ring"){
+            if(current_index == 0){
+                previous_station_button.disabled = true;
+            }else{
+                previous_station_button.disabled = false;
+            }
+            if(current_index+1 == stations[line_select.value].length){
+                next_station_button.disabled = true;
+            }else{
+                next_station_button.disabled = false;
+            }
         }else{
             previous_station_button.disabled = false;
-        }
-        if(current_index+1 == stations[line_select.value].length){
-            next_station_button.disabled = true;
-        }else{
             next_station_button.disabled = false;
         }
 
@@ -242,12 +247,14 @@ window.addEventListener("load", async function() {
 
     function previous_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][current_index-1];
+        const current_line_length = stations[line_select.value].length;
+        current_station_select.value = stations[line_select.value][((current_index-1%current_line_length)+current_line_length)%current_line_length];
         selection_changed();
     }
     function next_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][current_index+1];
+        const current_line_length = stations[line_select.value].length;
+        current_station_select.value = stations[line_select.value][((current_index+1%current_line_length)+current_line_length)%current_line_length];
         selection_changed();
     }
 
