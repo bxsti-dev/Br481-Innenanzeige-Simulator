@@ -160,7 +160,7 @@ window.addEventListener("load", async function() {
             }else{
 
                 if(destination_select.value == "Ring"){
-                    next_stations += stations[line_select.value][((current_index+i%current_line_length)+current_line_length)%current_line_length];
+                    next_stations += stations[line_select.value][loop_index(current_index+i, current_line_length, current_line_length)];
     
                     if(i != 3){
                         next_stations += ", ";
@@ -168,7 +168,7 @@ window.addEventListener("load", async function() {
                 }else{
                     var stations_left = ((destination_index-current_index-i)%current_line_length+current_line_length)%current_line_length;
 
-                    next_stations += stations[line_select.value][((current_index+i%current_line_length)+current_line_length)%current_line_length];
+                    next_stations += stations[line_select.value][loop_index(current_index+i, current_line_length, current_line_length)];
 
                     if(stations_left <= 0){
                         break;
@@ -190,7 +190,7 @@ window.addEventListener("load", async function() {
 
 
         // Update disable button state
-        if(destination_select.value != "Ring"){
+        if(is_ring == false){
             if(current_index == 0){
                 previous_station_button.disabled = true;
             }else{
@@ -246,12 +246,12 @@ window.addEventListener("load", async function() {
 
     function previous_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][((current_index-1%current_line_length)+current_line_length)%current_line_length];
+        current_station_select.value = stations[line_select.value][loop_index(current_index-1, current_line_length, current_line_length)];
         selection_changed();
     }
     function next_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        current_station_select.value = stations[line_select.value][((current_index+1%current_line_length)+current_line_length)%current_line_length];
+        current_station_select.value = stations[line_select.value][loop_index(current_index+1, current_line_length, current_line_length)];
         selection_changed();
     }
 
@@ -271,6 +271,11 @@ window.addEventListener("load", async function() {
         }else{ // Keine Endstation
             return current_station_select.value;
         }
+    }
+
+
+    function loop_index(current, goal, length){
+        return ( (current%goal)+length )%length;
     }
 
 
