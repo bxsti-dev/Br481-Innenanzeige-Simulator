@@ -115,14 +115,17 @@ window.addEventListener("load", async function() {
         }
 
         // Choose right start of String
-        if((Math.abs(destination_index - current_index) == 1) && is_ring == false){
-            next_stations += "Nächste Station : ";
-        }else if((Math.abs(destination_index - current_index) > 1) && is_ring == false){
-            next_stations += "Nächste Stationen ";
-        }else{
-            if(destination_select.value == "Ring"){
+        if(is_ring == false){
+            if((Math.abs(destination_index - current_index) == 1)){
+                next_stations += "Nächste Station : ";
+            }else if((Math.abs(destination_index - current_index) > 1)){
                 next_stations += "Nächste Stationen ";
-            }else{
+            }
+
+        }else{
+            if(destination_select.value == "Ring"){ // Infinite Ring without fixed destination
+                next_stations += "Nächste Stationen ";
+            }else{                                  // Ring with fixed destination
                 var stations_left = ((destination_index-current_index)%current_line_length+current_line_length)%current_line_length;
 
                 if(stations_left == 1){
@@ -130,7 +133,7 @@ window.addEventListener("load", async function() {
                 }else{
                     next_stations += "Nächste Stationen ";
                 }
-            }
+            }  
         }
 
         // Make rest of String
@@ -139,38 +142,38 @@ window.addEventListener("load", async function() {
             if(is_ring == false){
 
                 if(direction == 1){
-                    if(stations[line_select.value][current_index+i] != undefined && current_index+i <= destination_index){
+                    if(stations[line_select.value][current_index+i] != undefined && current_index+i <= destination_index){ // check next station (+1)
                         next_stations += stations[line_select.value][current_index+i]
                     }
 
-                    if(i != 3 && stations[line_select.value][current_index+i+1] != undefined && current_index+i+1 <= destination_index){
-                        next_stations += ", ";
+                    if(i != 3 && stations[line_select.value][current_index+i+1] != undefined && current_index+i+1 <= destination_index){ // check whether the station after next exists (+2)
+                        next_stations += ", "; 
                     }
                 }
                 if(direction == -1){
-                    if(stations[line_select.value][current_index-i] != undefined && current_index-i >= destination_index){
+                    if(stations[line_select.value][current_index-i] != undefined && current_index-i >= destination_index){ // check next station (+1)
                         next_stations += stations[line_select.value][current_index-i]
                     }
     
-                    if(i != 3 && stations[line_select.value][current_index-i-1] != undefined && current_index-i-1 >= destination_index){
+                    if(i != 3 && stations[line_select.value][current_index-i-1] != undefined && current_index-i-1 >= destination_index){ // check whether the station after next exists (+2)
                         next_stations += ", ";
                     }
                 }
 
             }else{
 
-                if(destination_select.value == "Ring"){
-                    next_stations += stations[line_select.value][loop_index(current_index+i, current_line_length, current_line_length)];
+                if(destination_select.value == "Ring"){ // Infinite Ring without fixed destination
+                    next_stations += stations[line_select.value][loop_index(current_index+i, current_line_length, current_line_length)]; // infinite next station
     
                     if(i != 3){
                         next_stations += ", ";
                     }
-                }else{
+                }else{ // Ring with fixed destination
                     var stations_left = ((destination_index-current_index-i)%current_line_length+current_line_length)%current_line_length;
 
                     next_stations += stations[line_select.value][loop_index(current_index+i, current_line_length, current_line_length)];
 
-                    if(stations_left <= 0){
+                    if(stations_left <= 0){ // Stop searching for stations if destination is reached
                         break;
                     }
 
@@ -182,12 +185,7 @@ window.addEventListener("load", async function() {
             }
 
         }
-
-        // TODO: Anzeige bleibt beim ersten code aus wenn Ziel und Current station gleich sind. (obwohl falsches ergebnis (3 mal zielbahnhof): beim neuen code bischen besser) === diese ausschalt bedinung ausmachen
-        // TODO: Beim neuen code auch nichts anzeigen wenn ziel und current gleich sind 
-        // TODO: Code optimieren
-        //console.log(next_stations);
-
+        // TODO: optimize?
 
         // Update disable button state
         if(is_ring == false){

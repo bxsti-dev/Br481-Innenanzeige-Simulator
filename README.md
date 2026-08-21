@@ -37,7 +37,6 @@
 ## 🧠 Todo
 - [ ] Einstellungsmenü (einstellbare größe, ...)
 - [ ] "SELFTEST" Zustand
-- [ ] "S41/S42 nach Ring" hinzufügen
 - [ ] Benutzerdefinierten Text anzeigen
 - [ ] "UI ausblenden" Option hinzufügen
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
