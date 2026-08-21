@@ -20,7 +20,7 @@ window.addEventListener("load", async function() {
     right_checkbox.addEventListener("change", exit_change);
 
     var is_ring = false;
-
+    var current_line_length = 0;
 
     // load station data
     let stations = {};
@@ -84,6 +84,7 @@ window.addEventListener("load", async function() {
         line_select.value = line;
         current_station_select.value = stations[line][0];
         destination_select.value = (line == "S41" || line == "S42") ? "Ring" : stations[line][stations[line].length-1]
+        current_line_length = stations[line_select.value].length;
 
         selection_changed();
     }
@@ -114,8 +115,6 @@ window.addEventListener("load", async function() {
         }
 
         // Choose right start of String
-        const ring_length = stations[line_select.value].length;
-
         if((Math.abs(destination_index - current_index) == 1) && is_ring == false){
             next_stations += "Nächste Station : ";
         }else if((Math.abs(destination_index - current_index) > 1) && is_ring == false){
@@ -124,7 +123,7 @@ window.addEventListener("load", async function() {
             if(destination_select.value == "Ring"){
                 next_stations += "Nächste Stationen ";
             }else{
-                var stations_left = ((destination_index-current_index)%ring_length+ring_length)%ring_length;
+                var stations_left = ((destination_index-current_index)%current_line_length+current_line_length)%current_line_length;
 
                 if(stations_left == 1){
                     next_stations += "Nächste Station : ";
@@ -161,15 +160,15 @@ window.addEventListener("load", async function() {
             }else{
 
                 if(destination_select.value == "Ring"){
-                    next_stations += stations[line_select.value][((current_index+i%ring_length)+ring_length)%ring_length];
+                    next_stations += stations[line_select.value][((current_index+i%current_line_length)+current_line_length)%current_line_length];
     
                     if(i != 3){
                         next_stations += ", ";
                     }
                 }else{
-                    var stations_left = ((destination_index-current_index-i)%ring_length+ring_length)%ring_length;
+                    var stations_left = ((destination_index-current_index-i)%current_line_length+current_line_length)%current_line_length;
 
-                    next_stations += stations[line_select.value][((current_index+i%ring_length)+ring_length)%ring_length];
+                    next_stations += stations[line_select.value][((current_index+i%current_line_length)+current_line_length)%current_line_length];
 
                     if(stations_left <= 0){
                         break;
@@ -247,13 +246,11 @@ window.addEventListener("load", async function() {
 
     function previous_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        const current_line_length = stations[line_select.value].length;
         current_station_select.value = stations[line_select.value][((current_index-1%current_line_length)+current_line_length)%current_line_length];
         selection_changed();
     }
     function next_station(){
         const current_index = stations[line_select.value].indexOf(current_station_select.value);
-        const current_line_length = stations[line_select.value].length;
         current_station_select.value = stations[line_select.value][((current_index+1%current_line_length)+current_line_length)%current_line_length];
         selection_changed();
     }
