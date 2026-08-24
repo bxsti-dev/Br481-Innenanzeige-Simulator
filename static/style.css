@@ -70,6 +70,12 @@ body {
     justify-content: space-between;
 }
 
+#current_station {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 #modes_box {
     display: flex;
     flex-direction: row;
@@ -107,12 +113,6 @@ select {
 
     min-width: 0;
     flex-shrink: 1;
-}
-
-#current_box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 }
 
 .checkbox_wrapper{
