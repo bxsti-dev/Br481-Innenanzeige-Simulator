@@ -40,6 +40,7 @@
 - [ ] Benutzerdefinierten Text anzeigen
 - [ ] "UI ausblenden" Option hinzufügen
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
+- [ ] Historische-, Zukunfts-, Finktive Linienverläufe
 - [ ] Steuerbar mit Train Simulator Classic
 
 <br/>
