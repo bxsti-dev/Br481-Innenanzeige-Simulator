@@ -30,7 +30,7 @@ window.addEventListener("load", async function() {
         funcs.clear_matrix();
 
         if(on_off_slider.checked == true){
-            line_changed()
+            selection_changed()
         }
     }
 
