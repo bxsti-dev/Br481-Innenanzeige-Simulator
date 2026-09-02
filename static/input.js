@@ -9,6 +9,7 @@ window.addEventListener("load", async function() {
     var toggle_state_button = document.getElementById("toggle_state_button");
     var left_checkbox = document.getElementById("left_checkbox");
     var right_checkbox = document.getElementById("right_checkbox");
+    var on_off_slider = this.document.getElementById("on_off_slider");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
@@ -18,9 +19,20 @@ window.addEventListener("load", async function() {
     toggle_state_button.addEventListener("click", toggle_state);
     left_checkbox.addEventListener("change", exit_change);
     right_checkbox.addEventListener("change", exit_change);
+    on_off_slider.addEventListener("change", is_enabled_toggle);
 
     var is_ring = false;
     var current_line_length = 0;
+
+    //global on/off toggle
+    function is_enabled_toggle(){
+        state.is_enabled = on_off_slider.checked;
+        funcs.clear_matrix();
+
+        if(on_off_slider.checked == true){
+            line_changed()
+        }
+    }
 
     // load station data
     let stations = {};

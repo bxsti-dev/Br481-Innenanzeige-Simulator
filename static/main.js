@@ -5,7 +5,8 @@ export var state = {
     scroll_counter: 0,
     current_station: "",
     exit_left: false,
-    exit_right: false
+    exit_right: false,
+    is_enabled: true
 }
 export var funcs = {};
 
@@ -150,48 +151,50 @@ window.addEventListener("load", async function() {
 
 
     function update(){
-        // SCROLLING WITH INFINITE LOOP //
-        if (state.mode == "scroll_loop"){
-            for(var y = 0;y<7;y++){
-                data[y].shift();
-                data[y].push(data[y][144]);
-            }
-        }
-        
-        // SCROLLING WITH STOP IN CENTER //
-        if (state.mode == "scroll_stop"){
-            state.scroll_counter += 1;
-
-            if(state.scroll_counter < 123){
+        if(state.is_enabled == true){
+            // SCROLLING WITH INFINITE LOOP //
+            if (state.mode == "scroll_loop"){
                 for(var y = 0;y<7;y++){
                     data[y].shift();
-                    data[y].push(0);
+                    data[y].push(data[y][144]);
                 }
             }
-            if(state.scroll_counter == parseInt(145-((145/2)-(get_character_length("Nächste Station:")/2)))){
-                setTimeout(function(){
-                    clear_matrix();
-                    state.mode = "static";
-                }, 1200);
-            }
-        }
+            
+            // SCROLLING WITH STOP IN CENTER //
+            if (state.mode == "scroll_stop"){
+                state.scroll_counter += 1;
 
-        // STATIC CENTERED TEXT //
-        if (state.mode == "static"){
-            var center_start = ((145/2)-(get_character_length(state.text)/2))
-            set_characters(center_start,state.text);
+                if(state.scroll_counter < 123){
+                    for(var y = 0;y<7;y++){
+                        data[y].shift();
+                        data[y].push(0);
+                    }
+                }
+                if(state.scroll_counter == parseInt(145-((145/2)-(get_character_length("Nächste Station:")/2)))){
+                    setTimeout(function(){
+                        clear_matrix();
+                        state.mode = "static";
+                    }, 1200);
+                }
+            }
 
-            if(state.exit_left == true && state.exit_right == true){
-                show_arrow("both");
-            }
-            if(state.exit_left == true && state.exit_right == false){
-                show_arrow("left");
-            }
-            if(state.exit_left == false && state.exit_right == true){
-                show_arrow("right");
-            }
-            if(state.exit_left == false && state.exit_right == false){
-                show_arrow("none");
+            // STATIC CENTERED TEXT //
+            if (state.mode == "static"){
+                var center_start = ((145/2)-(get_character_length(state.text)/2))
+                set_characters(center_start,state.text);
+
+                if(state.exit_left == true && state.exit_right == true){
+                    show_arrow("both");
+                }
+                if(state.exit_left == true && state.exit_right == false){
+                    show_arrow("left");
+                }
+                if(state.exit_left == false && state.exit_right == true){
+                    show_arrow("right");
+                }
+                if(state.exit_left == false && state.exit_right == false){
+                    show_arrow("none");
+                }
             }
         }
 
