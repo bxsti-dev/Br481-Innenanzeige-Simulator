@@ -185,7 +185,6 @@ window.addEventListener("load", async function() {
             }
 
         }
-        // TODO: optimize?
 
         // Update disable button state
         if(is_ring == false){

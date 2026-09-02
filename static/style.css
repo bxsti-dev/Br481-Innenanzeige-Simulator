@@ -42,7 +42,7 @@ body {
     flex-direction: column;
 
     background-color: #252933;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     border-color: #20252e;
     border-style: solid;
@@ -77,6 +77,12 @@ body {
 }
 
 #modes_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#bottom_actions{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -154,6 +160,21 @@ button:active:enabled{
 button:disabled{
     color: #828282;
     cursor: not-allowed;
+}
+
+button.secondary{
+    background-color: transparent;
+    color: white;
+    border-width: 1px;
+    border-color: #373c45;
+}
+button.secondary:hover:enabled{
+    background-color: #1a1e25;
+    border-color: #646c7b;
+    color: white;
+}
+button.secondary:active:enabled{
+    background-color: #343c4a;
 }
 
 input[type="checkbox"]{
