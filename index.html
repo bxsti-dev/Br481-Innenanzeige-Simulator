@@ -19,44 +19,52 @@
 
     <div id="control_box">
 
-        <div id="destination_box">
-            <select name="line" id="line"></select>
-            <div class="arrow"></div>
-            <select name="destination" id="destination"></select>
-        </div>
-
-        <div id="current_box">
-            <div class="checkbox_wrapper">
-                <label for="left_checkbox">Aussteig links</label>
-                <input type="checkbox" checked name="left_checkbox" id="left_checkbox" class="checkbox">
-            </div>
-            
-            <select name="current_station" id="current_station"></select>
-
-            <div class="checkbox_wrapper">
-                <input type="checkbox" name="right_checkbox" id="right_checkbox" class="checkbox">
-                <label for="right_checkbox">Aussteig rechts</label>
-            </div>
-        </div>
-
-        <div id="modes_box">
-            <button id="previous_station_button">< Station zurück</button>
-            <button id="toggle_state_button">"Nächste Station" zeigen</button>
-            <button id="next_station_button">Station weiter ></button>
-        </div>
-
-        <hr style="border-color: #373c459f;">
-
-        <div id="bottom_actions">
-            <div id="switch_wrapper">
-                <label for="on_off_slider" id="on_off_slider_label">Innenanzeige an/aus</label>
-                <label class="switch">
-                    <input type="checkbox" name="on_off_slider" id="on_off_slider" checked>
-                    <span class="slider"></span>
-                </label>
+        <div id="main_page">
+            <div id="destination_box">
+                <select name="line" id="line"></select>
+                <div class="arrow"></div>
+                <select name="destination" id="destination"></select>
             </div>
 
-            <button class="secondary">Zeige Erweiterte Funktionen ⋯</button>
+            <div id="current_box">
+                <div class="checkbox_wrapper">
+                    <label for="left_checkbox">Aussteig links</label>
+                    <input type="checkbox" checked name="left_checkbox" id="left_checkbox" class="checkbox">
+                </div>
+                
+                <select name="current_station" id="current_station"></select>
+
+                <div class="checkbox_wrapper">
+                    <input type="checkbox" name="right_checkbox" id="right_checkbox" class="checkbox">
+                    <label for="right_checkbox">Aussteig rechts</label>
+                </div>
+            </div>
+
+            <div id="modes_box">
+                <button id="previous_station_button">< Station zurück</button>
+                <button id="toggle_state_button">"Nächste Station" zeigen</button>
+                <button id="next_station_button">Station weiter ></button>
+            </div>
+
+            <hr style="border-color: #373c459f;">
+
+            <div id="bottom_actions">
+                <div id="switch_wrapper">
+                    <label for="on_off_slider" id="on_off_slider_label">Innenanzeige an/aus</label>
+                    <label class="switch">
+                        <input type="checkbox" name="on_off_slider" id="on_off_slider" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button class="secondary" onclick="document.getElementById('control_box').classList.toggle('open')">
+                    Zeige Erweiterte Funktionen<span class="advanced_arrow"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="advanced_page">
+            <button>advanced page</button>
         </div>
 
     </div>
