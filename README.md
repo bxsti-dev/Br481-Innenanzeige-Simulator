@@ -38,7 +38,6 @@
 - [ ] Einstellungsmenü (einstellbare größe, ...)
 - [ ] "SELFTEST" Zustand
 - [ ] Benutzerdefinierten Text anzeigen
-- [ ] "UI ausblenden" Option hinzufügen
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
 - [ ] Steuerbar mit Train Simulator Classic
