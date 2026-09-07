@@ -69,5 +69,16 @@
 
     </div>
 
+    <div id="hide_ui_button" class="line" onclick="
+        document.getElementById('hide_ui_button').classList.toggle('line');
+        document.getElementById('control_box').classList.toggle('hidden');">
+        <svg viewBox="0 0 50 40" width="30" height="30">
+            <path d="M4,20 Q25,-2 46,20 Q25,42 4,20 Z"
+                  fill="none" stroke="#ddd" stroke-width="3"/>
+            <circle cx="25" cy="20" r="7" fill="none" stroke="#ddd" stroke-width="3"/>
+            <line x1='10%' y1='90%' x2='90%' y2='10%' stroke='#fff' stroke-width='3' id="cross_line"/>
+        </svg>
+    </div>
+
 </body>
 </html>

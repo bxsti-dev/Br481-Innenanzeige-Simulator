@@ -41,6 +41,8 @@ body {
 
     display: flex;
     overflow: hidden;
+
+    opacity: 1;
     
     background-color: #252933;
     padding: 10px;
@@ -54,6 +56,10 @@ body {
 }
 #control_box.open{
     width: min(1200px,95%);
+}
+#control_box.hidden{
+    opacity: 0;
+    transition: opacity 180ms;
 }
 
 #main_page{
@@ -153,7 +159,7 @@ body {
     transform: rotate(45deg) scale(0.6);
 
     border-color: white;
-  }
+}
 
 /**************************************/
 
@@ -304,4 +310,42 @@ input[type="checkbox"]:checked::after {
 }
 #on_off_slider_label{
     margin-right: 10px;
+}
+
+/**************************************/
+
+#hide_ui_button{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 30px;
+    height: 30px;
+
+    background-color: #20252e;
+    border: solid 2px #373c45; 
+    border-radius: 5px;
+
+    padding: 4px;
+}
+#hide_ui_button:hover{
+    background-color: #171b21;
+    border-color: #646c7b;
+    cursor: pointer;
+}
+#hide_ui_button:active{
+    background-color: #343c4a;
+}
+#cross_line{
+    opacity: 0;
+    transition: opacity 150ms;
+}
+#hide_ui_button.line #cross_line{
+    opacity: 1;
+}
+@media (max-width: 1400px){
+    #hide_ui_button{
+        top: 10px;
+        right: 10px;
+    }
 }
