@@ -10,6 +10,7 @@ window.addEventListener("load", async function() {
     var left_checkbox = document.getElementById("left_checkbox");
     var right_checkbox = document.getElementById("right_checkbox");
     var on_off_slider = this.document.getElementById("on_off_slider");
+    const start_selftest_button = document.getElementById("start_selftest_button");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
@@ -20,6 +21,7 @@ window.addEventListener("load", async function() {
     left_checkbox.addEventListener("change", exit_change);
     right_checkbox.addEventListener("change", exit_change);
     on_off_slider.addEventListener("change", is_enabled_toggle);
+    start_selftest_button.addEventListener("click", start_selftest);
 
     var is_ring = false;
     var current_line_length = 0;
@@ -305,6 +307,41 @@ window.addEventListener("load", async function() {
             selection_changed();
         }
     }
+
+    // -------------------  advanced page  -----------------------------------------
+    function start_selftest(){
+        start_selftest_button.disabled = true;
+
+        // clear
+        funcs.clear_matrix();
+        state.exit_left = false;
+        state.exit_right = false;
+
+        // show selftest
+        setTimeout(() => {
+            state.mode = "static";
+            state.text = "SELFTEST";
+        }, 1000);
+
+        // clear
+        setTimeout(() => {
+            console.log("clear");
+            state.mode = "static";
+            state.text = "";
+            funcs.clear_matrix();
+        }, 1000+2000);
+
+        // restart back to normal
+        setTimeout(() => {
+            state.mode = "scroll_loop";
+            funcs.clear_matrix();
+            exit_change();
+            selection_changed();
+            start_selftest_button.disabled = false;
+        }, 1000+2000+5000);
+    };
+
+
 
     // start values
     change_line("S1"); // random?
