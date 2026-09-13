@@ -10,7 +10,11 @@ window.addEventListener("load", async function() {
     var left_checkbox = document.getElementById("left_checkbox");
     var right_checkbox = document.getElementById("right_checkbox");
     var on_off_slider = this.document.getElementById("on_off_slider");
-    const start_selftest_button = document.getElementById("start_selftest_button");
+    var start_selftest_button = document.getElementById("start_selftest_button");
+    var custom_text_button = document.getElementById("custom_text_button");
+    var custom_text_scroll = document.getElementById("custom_text_scroll");
+    var custom_text_static = document.getElementById("custom_text_static");
+    var custom_text_input = document.getElementById("custom_text_input");
 
     line_select.addEventListener("change", line_changed);
     destination_select.addEventListener("change", selection_changed);
@@ -22,6 +26,7 @@ window.addEventListener("load", async function() {
     right_checkbox.addEventListener("change", exit_change);
     on_off_slider.addEventListener("change", is_enabled_toggle);
     start_selftest_button.addEventListener("click", start_selftest);
+    custom_text_button.addEventListener("click", custom_text);
 
     var is_ring = false;
     var current_line_length = 0;
@@ -108,6 +113,8 @@ window.addEventListener("load", async function() {
         try{
             funcs.clear_matrix();
         }catch{console.log("ERROR?");}
+
+        exit_change(); //reload current exit checkbox state
         
         // Get next stations + make string
         var next_stations = "";
@@ -342,6 +349,23 @@ window.addEventListener("load", async function() {
     };
 
 
+    function custom_text(){
+        funcs.clear_matrix();
+        state.exit_left = false;
+        state.exit_right = false;
+
+        state.text = custom_text_input.value;
+
+        if(custom_text_scroll.checked == true){
+            state.mode = "scroll_loop";
+            funcs.add_characters(state.text + " ".repeat(10));
+            state.scroll_counter = 0;
+        }
+        if(custom_text_static.checked == true){
+            state.mode = "static";
+        }
+    }
+    
 
     // start values
     change_line("S1"); // random?
