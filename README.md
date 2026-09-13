@@ -35,10 +35,9 @@
 <br/>
 
 ## 🧠 Todo
-- [ ] Einstellungsmenü (einstellbare größe, ...)
-- [ ] "SELFTEST" Zustand
 - [ ] Benutzerdefinierten Text anzeigen
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
+- [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
 - [ ] Steuerbar mit Train Simulator Classic
 
