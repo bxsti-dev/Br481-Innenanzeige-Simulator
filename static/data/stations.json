@@ -1,6 +1,6 @@
 {
   "S1": [
-    "Wannsee", "Nikolassee (Wannseebahn)", "Schlachtensee", "Mexikoplatz", "Zehlendorf", "Sundgauer Straße", "Lichterfelde West", 
+    "Wannsee", "Nikolassee", "Schlachtensee", "Mexikoplatz", "Zehlendorf", "Sundgauer Straße", "Lichterfelde West", 
     "Botanischer Garten", "Rathaus Steglitz", "Feuerbachstraße", "Friedenau", "Schöneberg", "Julius-Leber-Brücke",
     "Yorckstraße", "Anhalter Bahnhof", "Potsdamer Platz", "Brandenburger Tor", 
     "Friedrichstraße", "Oranienburger Straße", "Nordbahnhof", "Humboldthain", "Gesundbrunnen", 
@@ -78,7 +78,7 @@
     "Friedrichsfelde Ost", "Lichtenberg", "Nöldnerplatz", "Ostkreuz", "Warschauer Straße", "Ostbahnhof", 
     "Jannowitzbrücke", "Alexanderplatz", "Hackescher Markt", "Friedrichstraße", "Hauptbahnhof", 
     "Bellevue", "Tiergarten", "Zoologischer Garten", "Savignyplatz", "Charlottenburg", "Westkreuz", 
-    "Grunewald", "Nikolassee (Wannseebahn)", "Wannsee", "Griebnitzsee", "Babelsberg", "Potsdam Hauptbahnhof"
+    "Grunewald", "Nikolassee", "Wannsee", "Griebnitzsee", "Babelsberg", "Potsdam Hauptbahnhof"
   ],
   "S75": [
     "Wartenberg", "Hohenschönhausen", "Gehrenseestraße", "Springpfuhl", "Friedrichsfelde Ost", 

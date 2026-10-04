@@ -35,7 +35,6 @@
 <br/>
 
 ## 🧠 Todo
-- [ ] Erweiterte Funktionen Button state (Pfeil, text)  
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
