@@ -26,11 +26,12 @@
 
 ## ⚙️ Funktionen
 - Realistische Nachbildung der BR481 Innenanzeige
-- Alle Zustände des Ablaufs
+- Alle Zustände des Ablaufs (inklusive selftest)
 - Freie Linienwahl aller Berliner S-Bahn Linien
 - Freie Auswahl des Zielbahnhofs auf der Linie
 - Freie Auswahl der aktuellen Position
 - Einstellbare Ausstiegsseite
+- Benutzerdefinierten Text anzeigen
 
 <br/>
 
