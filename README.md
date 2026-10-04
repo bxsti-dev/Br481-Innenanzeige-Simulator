@@ -38,6 +38,7 @@
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
+- [ ] Nikolassee Stationszusatz realistisch
 - [ ] Steuerbar mit Train Simulator Classic
 
 <br/>
