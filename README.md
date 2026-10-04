@@ -35,6 +35,7 @@
 <br/>
 
 ## 🧠 Todo
+- [ ] Mobile Version/Ansicht verbessern
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
