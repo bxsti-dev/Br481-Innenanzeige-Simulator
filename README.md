@@ -8,9 +8,8 @@
 <br/>
 
 <p align="center">
-  👉 <a href="https://github.com/bxsti-dev/Br481-Innenanzeige-Simulator"><strong>Hier ausprobieren!</strong></a> 👈
+  👉 <a href="https://bxsti-dev.github.io/Br481-Innenanzeige-Simulator/"><strong>Hier ausprobieren!</strong></a> 👈
   <br/>
-  (Noch nicht aktiv)
 </p>
 
 ---
