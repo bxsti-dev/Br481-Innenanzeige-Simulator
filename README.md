@@ -38,7 +38,7 @@
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
-- [ ] Better footer/github hyperlink?
+- [ ] Schönerer footer/github hyperlink?
 - [ ] Nikolassee Stationszusatz realistisch
 - [ ] Steuerbar mit Train Simulator Classic
 
