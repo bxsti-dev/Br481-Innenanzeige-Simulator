@@ -42,19 +42,13 @@ window.addEventListener("load", async function() {
     function draw(){
         if(canvas.getContext){
             const ctx = canvas.getContext("2d");
-            const dpr = window.devicePixelRatio || 1;
 
             pixel_space = matrix.clientWidth / 145;
             matrix_height = pixel_space * 7;
 
-            matrix.style = "height: " + matrix_height + "px";    // update matrix height
-            canvas.style.width = matrix.clientWidth + "px";
-            canvas.style.height = matrix_height + "px";
-            
-            canvas.width = Math.round(matrix.clientWidth * dpr); // update canvas width
-            canvas.height = Math.round(matrix_height * dpr);     // update canvas height                    
-
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            matrix.style = "height: " + matrix_height + "px"; // update matrix height
+            canvas.width = matrix.clientWidth;                // update canvas width
+            canvas.height = matrix_height;                    // update canvas height
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
