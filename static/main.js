@@ -47,8 +47,14 @@ window.addEventListener("load", async function() {
             matrix_height = pixel_space * 7;
 
             matrix.style = "height: " + matrix_height + "px"; // update matrix height
-            canvas.width = matrix.clientWidth;                // update canvas width
-            canvas.height = matrix_height;                    // update canvas height
+
+            const k = matrix.clientWidth < 1000 ? Math.min(3,2000/matrix.clientWidth) : 1;
+            
+            canvas.width = Math.round(matrix.clientWidth * k);
+            canvas.height = Math.round(matrix_height * k);
+            canvas.style.width = matrix.clientWidth + "px";
+            canvas.style.height = matrix_height + "px";
+            ctx.scale(k, k);
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
