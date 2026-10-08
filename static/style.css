@@ -469,3 +469,21 @@ footer a{
     color: white;
     opacity: 80%;
 }
+
+/**************************************/
+
+@media (max-width: 960px) {
+    html {
+        font-size: 12px;
+    }
+    button, select{
+        padding: 0.4em 0.6em;
+        font-size: 1rem;
+        min-width: 0;
+    }
+    #control_box{
+        zoom: 0.8;
+        margin: 0 auto;
+        padding: 0;
+    }
+}

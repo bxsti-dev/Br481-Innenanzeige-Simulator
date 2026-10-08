@@ -35,12 +35,13 @@
 <br/>
 
 ## 🧠 Todo
-- [ ] Mobile Version/Ansicht verbessern
+- [ ] Vollbild Button hinzufügen?
 - [ ] Seltene Variationen (Doppelpunkt, ==>, ...) 
 - [ ] neue slider/range anpassungen
 - [ ] Historische-, Zukunfts-, Fiktive Linienverläufe
 - [ ] Schönerer footer/github hyperlink?
 - [ ] Nikolassee Stationszusatz realistisch
+- [ ] Verschönerungen bei Mobiler version
 - [ ] Steuerbar mit Train Simulator Classic
 
 <br/>
