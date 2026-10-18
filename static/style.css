@@ -96,7 +96,11 @@ canvas {
     }
     #control_box.open{
         width: min(800px,95%);
-        height: 400px;
+        height: 340px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: #494f5b transparent;
     }
     #main_page, #advanced_page{
         width: 100%;
