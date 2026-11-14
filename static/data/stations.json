@@ -105,5 +105,13 @@
     "Friedrichstraße", "Hauptbahnhof", "Bellevue", "Tiergarten", "Zoologischer Garten", "Savignyplatz", 
     "Charlottenburg", "Westkreuz", "Messe Süd", "Heerstraße", "Olympia-Stadion", "Pichelsberg", 
     "Stresow", "Spandau"
+  ],
+  "S15 (Zukunft)": [
+    "Gesundbrunnen", "Wedding", "Perleberger Brücke", "Hauptbahnhof", "Potsdamer Platz", "Gleisdreieck", "Yorckstraße", 
+    "Julius-Leber-Brücke", "Südkreuz"
+  ],
+  "S6 (Zukunft)": [
+    "Gartenfeld", "Siemensstadt", "Wernerwerk", "Jungfernheide", "Beusselstraße", "Westhafen", "Perleberger Brücke",
+    "Hauptbahnhof", "Potsdamer Platz", "Gleisdreieck", "Yorckstraße", "Julius-Leber-Brücke", "Südkreuz"
   ]
 }

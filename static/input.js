@@ -241,7 +241,7 @@ window.addEventListener("load", async function() {
         // Set text on "scroll_loop"
         if(state.mode == "scroll_loop"){
             if(direction != 0){
-                state.text = "S " + line_select.value.replace("S","") +
+                state.text = "S " + line_select.value.replace("S","").split(" ")[0] +
                             " nach " + destination_select.value +
                             " ".repeat(7) + //6?
                             next_stations +
